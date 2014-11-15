@@ -25,6 +25,9 @@ namespace SaintThomas.Kiosk.Models
                 return string.Empty;
             }
         }
+        public int PrimaryKey {
+            get { return int.Parse(Id.Substring(Id.LastIndexOf("/") + 1)); }
+        }
     }
 
 }
