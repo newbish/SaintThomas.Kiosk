@@ -7,14 +7,16 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SaintThomas.Kiosk.Models;
+using RavenDB.AspNet.Identity;
 
 namespace SaintThomas.Kiosk.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : RavenController
     {
         public ManageController()
         {
+            this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(() => this.RavenSession));
         }
 
         public ManageController(UserManager<ApplicationUser> userManager)
