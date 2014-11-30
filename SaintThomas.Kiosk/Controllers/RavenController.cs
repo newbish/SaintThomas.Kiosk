@@ -7,7 +7,7 @@ using SaintThomas.Kiosk.Models;
 
 namespace SaintThomas.Kiosk.Controllers
 {
-    public class RavenController : Controller
+    public class RavenController : Controller, IActionFilter
     {
         /// <remarks>
         /// Paging code
@@ -18,10 +18,11 @@ namespace SaintThomas.Kiosk.Controllers
 
         public IDocumentSession RavenSession { get; set; }
 
-        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        protected override void OnActionExecuting(ActionExecutingContext filterContext) 
         {
             RavenSession = MvcApplication.Store.OpenSession();
             //RavenSession.Advanced.UseOptimisticConcurrency = true;
+            base.OnActionExecuting(filterContext);
         }
 
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
@@ -42,6 +43,7 @@ namespace SaintThomas.Kiosk.Controllers
 
                 RavenSession.SaveChanges();
             }
+            base.OnActionExecuted(filterContext);
         }
 
         /// <summary>

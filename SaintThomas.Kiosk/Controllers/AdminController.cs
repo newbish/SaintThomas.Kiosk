@@ -12,6 +12,7 @@ namespace SaintThomas.Kiosk.Controllers
     public class AdminController : RavenController
     {
         // GET: Admin
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             RavenQueryStatistics stats;
@@ -22,38 +23,19 @@ namespace SaintThomas.Kiosk.Controllers
         }
 
         // GET: Admin/Details/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Details(int id)
         {
-            RavenQueryStatistics stats;
-            var user = RavenSession.Query<Models.ApplicationUser>()
-                .Statistics(out stats)
-                .Where(x => x.Id == id.ToString());
+            var user = RavenSession.Load<ApplicationUser>(id);
+            var isUser = user.Claims.FirstOrDefault(c => c.ClaimType == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role" && c.ClaimValue == "User");
+            var isAdmin = user.Claims.FirstOrDefault(c => c.ClaimType == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role" && c.ClaimValue == "Admin");
+            ViewBag.IsUser = isUser != null;
+            ViewBag.IsAdmin = isAdmin != null;
             return View(user);
         }
 
-        // GET: Admin/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Admin/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
         // GET: Admin/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             var user = RavenSession.Load<ApplicationUser>(id);
@@ -66,7 +48,7 @@ namespace SaintThomas.Kiosk.Controllers
 
         // POST: Admin/Edit/5
         [HttpPost]
-        //public ActionResult Edit(int id, FormCollection collection)
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id, FormCollection collection)
         {
             ViewBag.IsUser = bool.Parse(collection["User"].Split(',')[0]);
@@ -96,7 +78,12 @@ namespace SaintThomas.Kiosk.Controllers
         // GET: Admin/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var user = RavenSession.Load<ApplicationUser>(id);
+            var isUser = user.Claims.FirstOrDefault(c => c.ClaimType == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role" && c.ClaimValue == "User");
+            var isAdmin = user.Claims.FirstOrDefault(c => c.ClaimType == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role" && c.ClaimValue == "Admin");
+            ViewBag.IsUser = isUser != null;
+            ViewBag.IsAdmin = isAdmin != null;
+            return View(user);
         }
 
         // POST: Admin/Delete/5
@@ -105,8 +92,10 @@ namespace SaintThomas.Kiosk.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
-
+                var ustore = new UserStore<ApplicationUser>(() => this.RavenSession);
+                var userManager = new Microsoft.AspNet.Identity.UserManager<ApplicationUser>(ustore);
+                var user = RavenSession.Load<ApplicationUser>(id);
+                userManager.DeleteAsync(user);
                 return RedirectToAction("Index");
             }
             catch

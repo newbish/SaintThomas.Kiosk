@@ -6,7 +6,7 @@ namespace SaintThomas.Kiosk.Models
     public class ApplicationUser : IdentityUser
     {
         [Required(ErrorMessage = "*"), Display(Name="Email")]
-        public string Email { get; set; }
+        public new string Email { get; set; }
         [Display(Name="First Name")]
         public string FirstName { get; set; }
         [Display(Name="Last Name")]

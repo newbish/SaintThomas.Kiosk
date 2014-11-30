@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using BundleTransformer.Core.Transformers;
+using System.Web;
 using System.Web.Optimization;
 
 namespace SaintThomas.Kiosk
@@ -8,6 +9,8 @@ namespace SaintThomas.Kiosk
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            var cssTransformer = new StyleTransformer();
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
@@ -26,10 +29,16 @@ namespace SaintThomas.Kiosk
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+            var less = new Bundle("~/Content/Kiosk").Include(
+                "~/Content/Kiosk.less",
+                "~/Content/fontawesome/font-awesome.less"
+                );
+            less.Transforms.Add(cssTransformer);
+            bundles.Add(less);
 
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
         }
     }
 }

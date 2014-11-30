@@ -15,7 +15,7 @@ namespace SaintThomas.Kiosk
 {
     public class MvcApplication : System.Web.HttpApplication
     {
-        public static DocumentStore Store;
+        public static EmbeddableDocumentStore Store;
         static readonly log4net.ILog Log = log4net.LogManager.GetLogger(typeof(MvcApplication));
 
         protected void Application_Start()

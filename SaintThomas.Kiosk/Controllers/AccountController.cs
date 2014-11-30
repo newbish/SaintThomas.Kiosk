@@ -13,10 +13,16 @@ namespace SaintThomas.Kiosk.Controllers
     [Authorize]
     public class AccountController : RavenController
     {
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            RavenSession = MvcApplication.Store.OpenSession();
+            //RavenSession.Advanced.UseOptimisticConcurrency = true;
+            base.OnActionExecuting(filterContext);
+        }
+
         public AccountController()
         {
             var ustore = new UserStore<ApplicationUser>(() => this.RavenSession);
-            ustore.UseCustomId = false;
             this.UserManager = new UserManager<ApplicationUser>(ustore);
         }
 

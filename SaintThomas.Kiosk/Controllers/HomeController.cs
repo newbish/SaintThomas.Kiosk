@@ -13,6 +13,11 @@ namespace SaintThomas.Kiosk.Controllers
             return View();
         }
 
+        public ActionResult Kiosk()
+        {
+            return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
