@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Saint Thomas Kiosk</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/Kiosk")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+
+    <div id="wrap">
+        <div id="settings">
+            <a href="@Url.Action("Index", "Admin")">
+                <i class="fa fa-cog fa-2x"></i>
+            </a>
+        </div>
+        <div class="container body-content">
+            @RenderBody()
+        </div>
+        <div id="push"></div>
+    </div>
+
+    <div id="footer">
+        Copyright &copy; @DateTime.Now.Year University of St. Thomas.
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

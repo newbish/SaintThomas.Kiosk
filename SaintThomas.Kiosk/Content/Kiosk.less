@@ -1,0 +1,36 @@
+﻿@footer-height: 25px;
+@opacity: 0.4;
+@ieopacity: (@opacity * 100);
+
+html,
+body {
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 100%;
+    background-size: 100% auto; /* width and height, can be %, px or whatever. */
+    background-image: url('../Images/Chapel.st.basil.night.png');
+}
+#settings {
+    float: right;
+    top: 0;
+    padding-top: 10px;
+    padding-right: 10px;
+    opacity: @opacity;
+    filter: alpha(opacity=@ieopacity);
+}
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by it's height */
+    margin: 0 auto -@footer-height;
+}
+#push,
+#footer {
+    height: @footer-height;
+}
+#footer {
+    float:right;
+    padding-right: 20px;
+    color: InfoBackground;
+}

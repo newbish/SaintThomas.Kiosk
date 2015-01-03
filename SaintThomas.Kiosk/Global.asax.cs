@@ -1,8 +1,12 @@
 ﻿using Raven.Client.Document;
 using Raven.Client.Embedded;
+using Raven.Client.FileSystem;
+using Raven.Client.Indexes;
 using Raven.Database.Server;
+using SaintThomas.Kiosk.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -16,6 +20,7 @@ namespace SaintThomas.Kiosk
     public class MvcApplication : System.Web.HttpApplication
     {
         public static EmbeddableDocumentStore Store;
+        public static string RavenFilestore = "Kiosk";
         static readonly log4net.ILog Log = log4net.LogManager.GetLogger(typeof(MvcApplication));
 
         protected void Application_Start()
@@ -34,6 +39,15 @@ namespace SaintThomas.Kiosk
                 UseEmbeddedHttpServer = true
             };
             Store.Initialize();
+            FilesStore fileStore = (FilesStore)Store.FilesStore;
+            fileStore.DefaultFileSystem = RavenFilestore;
+            fileStore.Initialize(true);
+            fileStore.AsyncFilesCommands.Admin.CreateOrUpdateFileSystemAsync(
+                new Raven.Abstractions.FileSystem.FileSystemDocument() {
+                    Settings = { { "Raven/FileSystem/DataDir", string.Format("~/App_Data/FileSystem/{0}", RavenFilestore) } }
+                },
+                RavenFilestore);
+            TryCreatingIndexesOrRedirectToErrorPage();
         }
 
         /// <summary>
@@ -59,6 +73,9 @@ namespace SaintThomas.Kiosk
         {
             try
             {
+                //new RavenDB.AspNet.Identity.User_ByUserName<ApplicationUser>().Execute(Store);
+                //var catalog = new CompositionContainer(new AssemblyCatalog(typeof(RavenDB.AspNet.Identity.User_ByUserName<ApplicationUser>).Assembly));
+                //IndexCreation.CreateIndexes(catalog, Store.DatabaseCommands.ForSystemDatabase(), Store.Conventions);
                 //IndexCreation.CreateIndexes(typeof(KnowledgeIndex).Assembly, Store);
             }
             catch (WebException e)

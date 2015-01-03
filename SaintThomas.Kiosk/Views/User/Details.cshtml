@@ -1,0 +1,57 @@
+﻿@model SaintThomas.Kiosk.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Details</h2>
+
+
+<div class="container">
+    <h4>ApplicationUser</h4>
+    <hr />
+    <div class="row">
+        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.Email)
+        </div>
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.FirstName)
+        </div>
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.LastName)
+        </div>
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </div>
+    </div>
+
+    <div class="row">
+        <label for="Roles" class="control-label col-md-2">Roles</label>
+        <div class="col-md-10">
+            @Html.CheckBox("User", (bool)ViewBag.IsUser, new { @disabled = "disabled" })
+            @Html.Label("User")
+            @Html.CheckBox("Admin", (bool)ViewBag.IsAdmin, new { @disabled = "disabled" })
+            @Html.Label("Admin")
+        </div>
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

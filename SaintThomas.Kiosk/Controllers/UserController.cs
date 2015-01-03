@@ -9,7 +9,7 @@ using RavenDB.AspNet.Identity;
 
 namespace SaintThomas.Kiosk.Controllers
 {
-    public class AdminController : RavenController
+    public class UserController : RavenController
     {
         // GET: Admin
         [Authorize(Roles = "Admin")]

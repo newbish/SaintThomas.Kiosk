@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using Raven.Client;
+using Raven.Client.FileSystem;
 using Microsoft.AspNet.Identity;
 using SaintThomas.Kiosk.Models;
 
@@ -17,10 +18,12 @@ namespace SaintThomas.Kiosk.Controllers
         public const int DefaultPage = 1;
 
         public IDocumentSession RavenSession { get; set; }
+        public IFilesStore RavenFS { get; set; }
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext) 
         {
             RavenSession = MvcApplication.Store.OpenSession();
+            RavenFS = MvcApplication.Store.FilesStore;
             //RavenSession.Advanced.UseOptimisticConcurrency = true;
             base.OnActionExecuting(filterContext);
         }
