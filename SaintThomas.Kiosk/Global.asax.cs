@@ -75,10 +75,6 @@ namespace SaintThomas.Kiosk
         {
             try
             {
-                //new RavenDB.AspNet.Identity.User_ByUserName<ApplicationUser>().Execute(Store);
-                //var catalog = new CompositionContainer(new AssemblyCatalog(typeof(RavenDB.AspNet.Identity.User_ByUserName<ApplicationUser>).Assembly));
-                //IndexCreation.CreateIndexes(catalog, Store.DatabaseCommands.ForSystemDatabase(), Store.Conventions);
-                //IndexCreation.CreateIndexes(typeof(KnowledgeIndex).Assembly, Store);
                 IndexCreation.CreateIndexes(typeof(PositionIndex).Assembly, Store);
             }
             catch (WebException e)
