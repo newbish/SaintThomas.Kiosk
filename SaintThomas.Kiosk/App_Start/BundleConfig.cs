@@ -12,14 +12,20 @@ namespace SaintThomas.Kiosk
             var cssTransformer = new StyleTransformer();
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery-ui.js"
+                        ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery-ext").Include(
-                "~/Scripts/jquery.oembed.js"));
-
+                "~/Scripts/jquery.oembed.js",
+                "~/Scripts/jquery.fancybox.js"
+                ));
+            bundles.Add(new ScriptBundle("~/bundles/kiosk").Include(
+                "~/Scripts/kiosk.js"
+                ));
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
@@ -32,9 +38,14 @@ namespace SaintThomas.Kiosk
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+            var fontawesome = new Bundle("~/Content/font-awesome").Include(
+                "~/Content/fontawesome/font-awesome.less"
+                );
+            fontawesome.Transforms.Add(cssTransformer);
+            bundles.Add(fontawesome);
             var less = new Bundle("~/Content/Kiosk").Include(
                 "~/Content/Kiosk.less",
-                "~/Content/fontawesome/font-awesome.less"
+                "~/Content/jquery.fancybox.css"
                 );
             less.Transforms.Add(cssTransformer);
             bundles.Add(less);

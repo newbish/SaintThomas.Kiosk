@@ -11,6 +11,7 @@
 </p>
 <table class="table">
     <tr>
+        <th></th>
         <th>
             @Html.DisplayNameFor(model => model.Body)
         </th>
@@ -25,27 +26,46 @@
         </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Body)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Video)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Position)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Active)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.PrimaryKey }) |
-            @Html.ActionLink("Details", "Details", new { id = item.PrimaryKey }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PrimaryKey })
-        </td>
-    </tr>
-}
-
+    <tbody id="sortable">
+        @foreach (var item in Model)
+        {
+            <tr id="@item.PrimaryKey">
+                <td>
+                    <i class="fa fa-sort"></i>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Body)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Video)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Position)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Active)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.PrimaryKey }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.PrimaryKey }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.PrimaryKey })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+<script>
+  $(function() {
+      $("#sortable").sortable({
+          update: function (event, ui) {
+              var sort = $("#sortable").sortable("serialize").replace(/\[\]/gi, "");
+              //var sort = $("#sortable").sortable('toArray');
+              $.post(
+                  "@Url.Action("Sort")",
+                  { list: $("#sortable").sortable('toArray') },
+                  null);
+          }
+      });
+      $("#sortable").disableSelection();
+  });
+</script>

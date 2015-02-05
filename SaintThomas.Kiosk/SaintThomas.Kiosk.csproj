@@ -45,6 +45,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.4.0.0-ci1007\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.4.0.0-ci1007\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="BundleTransformer.Core, Version=1.9.35.0, Culture=neutral, PublicKeyToken=973c344c93aac60d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\BundleTransformer.Core.1.9.35\lib\net40\BundleTransformer.Core.dll</HintPath>
@@ -211,6 +217,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Indexes\PositionIndex.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ImageModels.cs" />
@@ -238,6 +245,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jquery.fancybox.css" />
     <Content Include="Error.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -245,6 +253,12 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\Chapel.st.basil.night.png" />
+    <Content Include="Images\fancybox\blank.gif" />
+    <Content Include="Images\fancybox\fancybox_loading%402x.gif" />
+    <Content Include="Images\fancybox\fancybox_loading.gif" />
+    <Content Include="Images\fancybox\fancybox_overlay.png" />
+    <Content Include="Images\fancybox\fancybox_sprite%402x.png" />
+    <Content Include="Images\fancybox\fancybox_sprite.png" />
     <Content Include="Images\PSD\Chapel.st.basil.night.psd" />
     <Content Include="Content\Kiosk.less" />
     <Content Include="Content\fontawesome\bordered-pulled.less" />
@@ -276,12 +290,16 @@
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.fancybox.js" />
     <Content Include="Scripts\jquery.oembed.js" />
     <Content Include="Scripts\jquery.oembed.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Kiosk.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\respond.js" />
@@ -302,8 +320,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -337,6 +353,8 @@
     <Content Include="Views\Image\Index.cshtml" />
     <Content Include="Views\Image\Create.cshtml" />
     <Content Include="Views\Image\Delete.cshtml" />
+    <Content Include="Views\Image\Edit.cshtml" />
+    <Content Include="Views\Image\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
@@ -388,6 +406,7 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
+  <Import Project="..\packages\AutoMapper.4.0.0-ci1007\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.4.0.0-ci1007\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

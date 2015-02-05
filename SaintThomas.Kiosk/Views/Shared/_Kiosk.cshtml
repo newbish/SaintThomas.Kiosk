@@ -5,18 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Saint Thomas Kiosk</title>
     @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/Kiosk")
+    @Styles.Render("~/Content/font-awesome")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/Kiosk")
 </head>
 <body>
 
     <div id="wrap">
         <div id="settings">
-            <a href="@Url.Action("Index", "Admin")">
+            <a href="@Url.Action("Index", "Image")">
                 <i class="fa fa-cog fa-2x"></i>
             </a>
         </div>
-        <div class="container body-content">
+        <div class="">
             @RenderBody()
         </div>
         <div id="push"></div>
@@ -28,7 +29,9 @@
 
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquery-ext")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/kiosk")
     @RenderSection("scripts", required: false)
 </body>
 </html>

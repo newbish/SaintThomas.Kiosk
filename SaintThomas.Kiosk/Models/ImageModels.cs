@@ -13,6 +13,7 @@ namespace SaintThomas.Kiosk.Models
         [DataType(DataType.MultilineText)]
         public string Body { get; set; }
         [Display(Name="Video")]
+        [DataType(DataType.Url)]
         public string Video { get; set; }
         [Display(Name="Active")]
         public bool Active { get; set; }
@@ -20,23 +21,18 @@ namespace SaintThomas.Kiosk.Models
         public int Position { get; set; }
         public int PrimaryKey
         {
-            get { return int.Parse(Id.Substring(Id.LastIndexOf("/") + 1)); }
+            get
+            {
+                if (Id != null)
+                    return int.Parse(Id.Substring(Id.LastIndexOf("/") + 1));
+                return 0;
+            }
         }
     }
-    public class ImageCreateModel
+    public class ImageCreateEditModel : Image
     {
-        [Display(Name = "Body Text")]
-        [DataType(DataType.MultilineText)]
-        public string Body { get; set; }
         [DataType(DataType.Upload)]
         [Display(Name = "Image")]
         public HttpPostedFileBase ImageContent { get; set; }
-        [DataType(DataType.Url)]
-        [Display(Name = "Video")]
-        public string Video { get; set; }
-        [Display(Name = "Active")]
-        public bool Active { get; set; }
-        [Display(Name = "Position")]
-        public int Position { get; set; }
     }
 }

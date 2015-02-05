@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Raven.Client;
+using Raven.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,30 +8,26 @@ using System.Web.Mvc;
 
 namespace SaintThomas.Kiosk.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : RavenController
     {
         public ActionResult Index()
         {
-            return View();
+            RavenQueryStatistics stats;
+            var content = RavenSession.Query<Models.Image>("PositionIndex")
+                .Statistics(out stats)
+                .Take(5)
+                .ToList();
+            return View(content);
         }
 
         public ActionResult Kiosk()
         {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            RavenQueryStatistics stats;
+            var content = RavenSession.Query<Models.Image>("PositionIndex")
+                .Statistics(out stats)
+                .Take(5)
+                .ToList();
+            return View(content);
         }
     }
 }

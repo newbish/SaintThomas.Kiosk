@@ -12,7 +12,7 @@ namespace SaintThomas.Kiosk.Controllers
     public class UserController : RavenController
     {
         // GET: Admin
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,User")]
         public ActionResult Index()
         {
             RavenQueryStatistics stats;
@@ -23,7 +23,7 @@ namespace SaintThomas.Kiosk.Controllers
         }
 
         // GET: Admin/Details/5
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,User")]
         public ActionResult Details(int id)
         {
             var user = RavenSession.Load<ApplicationUser>(id);

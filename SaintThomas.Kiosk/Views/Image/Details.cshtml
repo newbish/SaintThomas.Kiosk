@@ -1,13 +1,11 @@
 ﻿@model SaintThomas.Kiosk.Models.Image
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Details";
 }
 
+<h2>Details</h2>
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
 <div>
     <h4>Image</h4>
     <hr />
@@ -36,19 +34,12 @@
             <div id="video"></div>
             @Html.DisplayFor(model => model.Video)
         </dd>
-
-        <dd class="form-actions no-color">
-            @using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
-                <input type="submit" value="Delete" class="btn btn-default" />
-            }
-        </dd>
     </dl>
 </div>
-<div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PrimaryKey }) |
     @Html.ActionLink("Back to List", "Index")
-</div>
+</p>
 <script type="text/javascript">
     $(document).ready(function () {
         $(".oembed").oembed(null,

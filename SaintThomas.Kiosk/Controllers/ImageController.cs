@@ -15,6 +15,7 @@ namespace SaintThomas.Kiosk.Controllers
     public class ImageController : RavenController
     {
         string contentFormat = "images/{0}";
+        [Authorize(Roles = "Admin,User")]
         // GET: Content
         public ActionResult Index()
         {
@@ -25,15 +26,17 @@ namespace SaintThomas.Kiosk.Controllers
             return View(content);
         }
 
+        [Authorize(Roles = "Admin,User")]
         // GET: Content/Create
         public ActionResult Create()
         {
             return View();
         }
 
+        [Authorize(Roles = "Admin,User")]
         // POST: Content/Create
         [HttpPost]
-        public ActionResult Create(ImageCreateModel model)
+        public ActionResult Create(ImageCreateEditModel model)
         {
             try
             {
@@ -63,29 +66,46 @@ namespace SaintThomas.Kiosk.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin,User")]
         // GET: Content/Edit/5
         public ActionResult Edit(int id)
         {
-            var image = RavenSession.Load<Image>(id);
+            var image = AutoMapper.Mapper.Map<ImageCreateEditModel>(RavenSession.Load<Image>(id));
             return View(image);
         }
 
+        [Authorize(Roles = "Admin,User")]
         // POST: Content/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, ImageCreateEditModel model)
         {
             try
             {
-                // TODO: Add update logic here
-
+                var image = RavenSession.Load<Image>(model.PrimaryKey);
+                image.Body = model.Body;
+                image.Video = model.Video;
+                image.Position = model.Position;
+                RavenSession.Store(image);
+                if (model.ImageContent != null)
+                    using (var filesSession = RavenFS.OpenAsyncSession())
+                    {
+                        var metadata = new RavenJObject {
+                        { "Image", image.PrimaryKey },
+                        { "Name", model.ImageContent.FileName }
+                    };
+                        filesSession.RegisterUpload(string.Format(contentFormat, image.PrimaryKey), model.ImageContent.InputStream, metadata);
+                        filesSession.SaveChangesAsync();
+                    }
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                var image = AutoMapper.Mapper.Map<ImageCreateEditModel>(RavenSession.Load<Image>(id));
+                return View(image);
             }
         }
 
+        [Authorize(Roles = "Admin,User")]
         // GET: Content/Delete/5
         public ActionResult Delete(int id)
         {
@@ -93,20 +113,50 @@ namespace SaintThomas.Kiosk.Controllers
             return View(image);
         }
 
+        [Authorize(Roles = "Admin,User")]
         // POST: Content/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public async Task<ActionResult> Delete(int id, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
-
+                RavenSession.Delete<Image>(RavenSession.Load<Image>(id));
+                using (var filesSession = RavenFS.OpenAsyncSession())
+                {
+                    filesSession.RegisterFileDeletion(string.Format(contentFormat, id));
+                    await filesSession.SaveChangesAsync();
+                }
+                RavenSession.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
             {
                 return View();
             }
+        }
+        [Authorize(Roles = "Admin,User")]
+        // GET: Content/Edit/5
+        public ActionResult Details(int id)
+        {
+            var image = RavenSession.Load<Image>(id);
+            return View(image);
+        }
+        [Authorize(Roles = "Admin,User")]
+        [HttpPost]
+        public string Sort(List<long> list)
+        {
+            if (list != null && list.Count > 0)
+            {
+                for (var i = 0; i < list.Count; i++)
+                {
+                    var image = RavenSession.Load<Image>(list[i]);
+                    image.Position = i;
+                    RavenSession.Store(image);
+                }
+                RavenSession.SaveChanges();
+                return "true";
+            }
+            return "false";
         }
         public async Task<ActionResult> Download(int id)
         {

@@ -14,6 +14,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using SaintThomas.Kiosk.Indexes;
 
 namespace SaintThomas.Kiosk
 {
@@ -47,6 +48,7 @@ namespace SaintThomas.Kiosk
                     Settings = { { "Raven/FileSystem/DataDir", string.Format("~/App_Data/FileSystem/{0}", RavenFilestore) } }
                 },
                 RavenFilestore);
+            CreateObjectMaps();
             TryCreatingIndexesOrRedirectToErrorPage();
         }
 
@@ -77,6 +79,7 @@ namespace SaintThomas.Kiosk
                 //var catalog = new CompositionContainer(new AssemblyCatalog(typeof(RavenDB.AspNet.Identity.User_ByUserName<ApplicationUser>).Assembly));
                 //IndexCreation.CreateIndexes(catalog, Store.DatabaseCommands.ForSystemDatabase(), Store.Conventions);
                 //IndexCreation.CreateIndexes(typeof(KnowledgeIndex).Assembly, Store);
+                IndexCreation.CreateIndexes(typeof(PositionIndex).Assembly, Store);
             }
             catch (WebException e)
             {
@@ -102,6 +105,10 @@ namespace SaintThomas.Kiosk
                         throw;
                 }
             }
+        }
+        static void CreateObjectMaps()
+        {
+            AutoMapper.Mapper.CreateMap<Image, ImageCreateEditModel>();
         }
     }
 }

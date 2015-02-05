@@ -1,15 +1,15 @@
-﻿@{
+﻿@model IEnumerable<SaintThomas.Kiosk.Models.Image>
+
+@{
     Layout = "~/Views/Shared/_Kiosk.cshtml";
     ViewBag.Title = "Home Page";
 }
 
-
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+    <div style="display: inline;">
+        @foreach (var item in Model)
+        {
+            <div style="display: inline;">
+                <a class="fancybox" href="@item.Video"><img src="@Url.Content(string.Format("~/Image/Download/{0}", item.PrimaryKey))" /></a>
+            </div>
+        }
+    </div>
