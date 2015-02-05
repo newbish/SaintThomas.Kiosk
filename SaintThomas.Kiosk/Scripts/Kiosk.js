@@ -6,8 +6,7 @@
         var el = $(this).clone().appendTo(wrap);
 
         el.oembed(null, {
-            embedMethod: 'replace',
-            youtube: { auto: true },
+            embedMethod: 'append',
             afterEmbed: function (rez) {
                 var what = $(rez.code);
                 var type = 'html';
@@ -34,7 +33,8 @@
             },
             onError: function () {
                 $.fancybox.open(this);
-            }
+            },
+            youtube: { autoplay: true }
         });
         return false;
     });

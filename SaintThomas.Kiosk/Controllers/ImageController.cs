@@ -84,7 +84,6 @@ namespace SaintThomas.Kiosk.Controllers
                 var image = RavenSession.Load<Image>(model.PrimaryKey);
                 image.Body = model.Body;
                 image.Video = model.Video;
-                image.Position = model.Position;
                 RavenSession.Store(image);
                 if (model.ImageContent != null)
                     using (var filesSession = RavenFS.OpenAsyncSession())

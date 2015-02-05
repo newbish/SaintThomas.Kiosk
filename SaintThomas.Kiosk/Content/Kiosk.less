@@ -1,6 +1,7 @@
 ﻿@footer-height: 25px;
-@opacity: 0.4;
+@opacity: 0.10;
 @ieopacity: (@opacity * 100);
+@redbackground: #d0202e;
 
 html,
 body {
@@ -10,21 +11,35 @@ body {
     background-size: 100% auto; /* width and height, can be %, px or whatever. */
     background-image: url('../Images/Chapel.st.basil.night.png');
 }
+#container {
+    margin: 0 auto;
+    padding: 0 auto;
+    display: inline-block;
+    text-align: center;
+}
 #settings {
     top: 10px;
     left: -40px;
     padding-top: 10px;
     padding-left: 100%;
-    opacity: @opacity;
-    filter: alpha(opacity=@ieopacity);
     position: absolute;
 }
+#settings i { 
+    opacity: @opacity;
+    filter: alpha(opacity=@ieopacity);
+}
+#settings i:hover {
+    opacity: @opacity * 5;
+}
 #wrap {
-    min-height: 100%;
+    //min-height: 100%;
     height: auto !important;
-    height: 100%;
+   // height: 100%;
+    width: 100%;
+    text-align: center;
     /* Negative indent footer by it's height */
     margin: 0 auto -@footer-height;
+    background-color: @redbackground;
 }
 #push,
 #footer {
@@ -44,4 +59,20 @@ body {
     display: block;
     width: 100%;
     height: 100%;
+}
+#header { 
+    height: 54px;
+    background-color: white;
+    width: 100%;
+}
+#logo { 
+    background-image: url('../Images/SaintThomasLogo.png');
+    background-repeat: no-repeat;
+	position: absolute;
+	width: 100%;
+	height: 54px;
+    left: 10px;
+}
+#body {
+    padding-top: 3px;
 }

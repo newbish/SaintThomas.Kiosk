@@ -12,12 +12,15 @@
 <body>
 
     <div id="wrap">
+        <div id="header">
+            <i id="logo"></i>
+        </div>
         <div id="settings">
             <a href="@Url.Action("Index", "Image")">
                 <i class="fa fa-cog fa-2x"></i>
             </a>
         </div>
-        <div class="">
+        <div id="body">
             @RenderBody()
         </div>
         <div id="push"></div>
