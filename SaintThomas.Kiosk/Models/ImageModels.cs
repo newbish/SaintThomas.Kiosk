@@ -28,6 +28,15 @@ namespace SaintThomas.Kiosk.Models
                 return 0;
             }
         }
+        public string VideoExt
+        {
+            get
+            {
+                if (Video.IndexOf("youtube", StringComparison.InvariantCultureIgnoreCase) > 0)
+                    return string.Format("{0}&autoplay=1", Video);
+                return Video;
+            }
+        }
     }
     public class ImageCreateEditModel : Image
     {

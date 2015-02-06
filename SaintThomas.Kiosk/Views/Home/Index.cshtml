@@ -9,7 +9,7 @@
     @foreach (var item in Model)
     {
         <div style="display: inline;">
-            <a class="fancybox" href="@item.Video"><img src="@Url.Content(string.Format("~/Image/Download/{0}", item.PrimaryKey))" /></a>
+            <a class="fancybox" href="@item.VideoExt"><img src="@Url.Content(string.Format("~/Image/Download/{0}", item.PrimaryKey))" /></a>
         </div>
     }
 </div>
