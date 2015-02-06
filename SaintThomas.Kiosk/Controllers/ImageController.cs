@@ -26,14 +26,14 @@ namespace SaintThomas.Kiosk.Controllers
             return View(content);
         }
 
-        [Authorize(Roles = "Admin,User")]
+        [Authorize(Roles = "Admin")]
         // GET: Content/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        [Authorize(Roles = "Admin,User")]
+        [Authorize(Roles = "Admin")]
         // POST: Content/Create
         [HttpPost]
         public ActionResult Create(ImageCreateEditModel model)
@@ -66,7 +66,7 @@ namespace SaintThomas.Kiosk.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin,User")]
+        [Authorize(Roles = "Admin")]
         // GET: Content/Edit/5
         public ActionResult Edit(int id)
         {
@@ -74,7 +74,7 @@ namespace SaintThomas.Kiosk.Controllers
             return View(image);
         }
 
-        [Authorize(Roles = "Admin,User")]
+        [Authorize(Roles = "Admin")]
         // POST: Content/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, ImageCreateEditModel model)
@@ -104,7 +104,7 @@ namespace SaintThomas.Kiosk.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin,User")]
+        [Authorize(Roles = "Admin")]
         // GET: Content/Delete/5
         public ActionResult Delete(int id)
         {
@@ -112,7 +112,7 @@ namespace SaintThomas.Kiosk.Controllers
             return View(image);
         }
 
-        [Authorize(Roles = "Admin,User")]
+        [Authorize(Roles = "Admin")]
         // POST: Content/Delete/5
         [HttpPost]
         public async Task<ActionResult> Delete(int id, FormCollection collection)
@@ -140,7 +140,7 @@ namespace SaintThomas.Kiosk.Controllers
             var image = RavenSession.Load<Image>(id);
             return View(image);
         }
-        [Authorize(Roles = "Admin,User")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public string Sort(List<long> list)
         {

@@ -76,6 +76,7 @@ namespace SaintThomas.Kiosk.Controllers
         }
 
         // GET: Admin/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             var user = RavenSession.Load<ApplicationUser>(id);
@@ -88,6 +89,7 @@ namespace SaintThomas.Kiosk.Controllers
 
         // POST: Admin/Delete/5
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try
