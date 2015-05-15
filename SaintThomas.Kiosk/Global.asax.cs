@@ -33,7 +33,7 @@ namespace SaintThomas.Kiosk
 
             // Init raven store
             //Raven.Database.Server.NonAdminHttp.EnsureCanListenToWhenInNonAdminContext(8080);
-            NonAdminHttp.EnsureCanListenToWhenInNonAdminContext(8080, false);
+            NonAdminHttp.EnsureCanListenToWhenInNonAdminContext(8081, false);
             Store = new EmbeddableDocumentStore
             {
                 ConnectionStringName = "RavenDB",

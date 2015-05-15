@@ -31,6 +31,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -39,6 +40,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
@@ -226,6 +228,83 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Database\IndexDefinitions\indexes.txt" />
+    <Content Include="App_Data\Database\Indexes\indexes.txt" />
+    <Content Include="App_Data\Database\raven-data.ico" />
+    <Content Include="App_Data\FileSystem\Kiosk\Data.ravenfs" />
+    <Content Include="App_Data\FileSystem\Kiosk\Indexes\index.version" />
+    <Content Include="App_Data\FileSystem\Kiosk\Indexes\segments.gen" />
+    <Content Include="App_Data\FileSystem\Kiosk\Indexes\segments_x" />
+    <Content Include="App_Data\FileSystem\Kiosk\Indexes\_u.fdt" />
+    <Content Include="App_Data\FileSystem\Kiosk\Indexes\_u.fdx" />
+    <Content Include="App_Data\FileSystem\Kiosk\Indexes\_u.fnm" />
+    <Content Include="App_Data\FileSystem\Kiosk\Indexes\_u.frq" />
+    <Content Include="App_Data\FileSystem\Kiosk\Indexes\_u.prx" />
+    <Content Include="App_Data\FileSystem\Kiosk\Indexes\_u.tii" />
+    <Content Include="App_Data\FileSystem\Kiosk\Indexes\_u.tis" />
+    <Content Include="App_Data\FileSystem\Kiosk\Indexes\_v.cfs" />
+    <Content Include="App_Data\FileSystem\Kiosk\Indexes\_v_1.del" />
+    <Content Include="App_Data\FileSystem\Kiosk\Indexes\_w.cfs" />
+    <Content Include="App_Data\FileSystem\Kiosk\logs\RFS.log" />
+    <Content Include="App_Data\FileSystem\Kiosk\logs\RFSres00001.jrs" />
+    <Content Include="App_Data\FileSystem\Kiosk\logs\RFSres00002.jrs" />
+    <Content Include="App_Data\FileSystem\Kiosk\system\RFS.chk" />
+    <Content Include="App_Data\Database\Data" />
+    <Content Include="App_Data\Database\IndexDefinitions\2.index" />
+    <Content Include="App_Data\Database\IndexDefinitions\5.index" />
+    <Content Include="App_Data\Database\IndexDefinitions\9.index" />
+    <Content Include="App_Data\Database\IndexDefinitions\temp\kvlbfrp0.out" />
+    <Content Include="App_Data\Database\Indexes\2\index.version" />
+    <Content Include="App_Data\Database\Indexes\2\segments.gen" />
+    <Content Include="App_Data\Database\Indexes\2\segments_2a" />
+    <Content Include="App_Data\Database\Indexes\2\_28.fdt" />
+    <Content Include="App_Data\Database\Indexes\2\_28.fdx" />
+    <Content Include="App_Data\Database\Indexes\2\_28.fnm" />
+    <Content Include="App_Data\Database\Indexes\2\_28.frq" />
+    <Content Include="App_Data\Database\Indexes\2\_28.prx" />
+    <Content Include="App_Data\Database\Indexes\2\_28.tii" />
+    <Content Include="App_Data\Database\Indexes\2\_28.tis" />
+    <Content Include="App_Data\Database\Indexes\2\_28_2.del" />
+    <Content Include="App_Data\Database\Indexes\2\_29.cfs" />
+    <Content Include="App_Data\Database\Indexes\2\_29_1.del" />
+    <Content Include="App_Data\Database\Indexes\2\_2a.cfs" />
+    <Content Include="App_Data\Database\Indexes\5\index.version" />
+    <Content Include="App_Data\Database\Indexes\5\segments.gen" />
+    <Content Include="App_Data\Database\Indexes\5\segments_a" />
+    <Content Include="App_Data\Database\Indexes\5\_0.cfs" />
+    <Content Include="App_Data\Database\Indexes\5\_0_1.del" />
+    <Content Include="App_Data\Database\Indexes\5\_1.cfs" />
+    <Content Include="App_Data\Database\Indexes\5\_1_1.del" />
+    <Content Include="App_Data\Database\Indexes\5\_2.cfs" />
+    <Content Include="App_Data\Database\Indexes\5\_3.cfs" />
+    <Content Include="App_Data\Database\Indexes\5\_3_1.del" />
+    <Content Include="App_Data\Database\Indexes\5\_4.cfs" />
+    <Content Include="App_Data\Database\Indexes\5\_4_1.del" />
+    <Content Include="App_Data\Database\Indexes\5\_5.cfs" />
+    <Content Include="App_Data\Database\Indexes\5\_5_1.del" />
+    <Content Include="App_Data\Database\Indexes\5\_6.cfs" />
+    <Content Include="App_Data\Database\Indexes\5\_6_1.del" />
+    <Content Include="App_Data\Database\Indexes\5\_7.cfs" />
+    <Content Include="App_Data\Database\Indexes\9\index.version" />
+    <Content Include="App_Data\Database\Indexes\9\segments.gen" />
+    <Content Include="App_Data\Database\Indexes\9\segments_w" />
+    <Content Include="App_Data\Database\Indexes\9\_u.fdt" />
+    <Content Include="App_Data\Database\Indexes\9\_u.fdx" />
+    <Content Include="App_Data\Database\Indexes\9\_u.fnm" />
+    <Content Include="App_Data\Database\Indexes\9\_u.frq" />
+    <Content Include="App_Data\Database\Indexes\9\_u.prx" />
+    <Content Include="App_Data\Database\Indexes\9\_u.tii" />
+    <Content Include="App_Data\Database\Indexes\9\_u.tis" />
+    <Content Include="App_Data\Database\Indexes\9\_u_3.del" />
+    <Content Include="App_Data\Database\Indexes\9\_v.cfs" />
+    <Content Include="App_Data\Database\Indexes\9\_v_1.del" />
+    <Content Include="App_Data\Database\Indexes\9\_w.cfs" />
+    <Content Include="App_Data\Database\Indexes\9\_w_1.del" />
+    <Content Include="App_Data\Database\Indexes\9\_x.cfs" />
+    <Content Include="App_Data\Database\logs\RVN.log" />
+    <Content Include="App_Data\Database\logs\RVNres00001.jrs" />
+    <Content Include="App_Data\Database\logs\RVNres00002.jrs" />
+    <Content Include="App_Data\Database\system\RVN.chk" />
     <None Include="BundleTransformer.Configuration.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -283,6 +362,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <None Include="Properties\PublishProfiles\epmi.pubxml" />
+    <None Include="Properties\PublishProfiles\KioskDeploy.pubxml" />
+    <None Include="Properties\PublishProfiles\stthom.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Images\SaintThomasLogo.png" />
     <Content Include="Scripts\bootstrap.js" />
@@ -359,7 +441,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\Database\temp\" />
+    <Folder Include="App_Data\FileSystem\Kiosk\temp\" />
     <Folder Include="Views\Raven\" />
   </ItemGroup>
   <ItemGroup>
