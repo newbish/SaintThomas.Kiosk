@@ -17,6 +17,7 @@ build/
 bld/
 [Bb]in/
 [Oo]bj/
+[Dd]eploy/
 
 # Roslyn cache directories
 *.ide/
@@ -181,3 +182,7 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
+
+*/App_Data/Database
+*/App_Data/FileSystem
+*/Raven
