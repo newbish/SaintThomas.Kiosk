@@ -33,7 +33,7 @@ namespace SaintThomas.Kiosk.Models
             get
             {
                 if (Video.IndexOf("youtube", StringComparison.InvariantCultureIgnoreCase) > 0)
-                    return string.Format("{0}&autoplay=1", Video);
+                    return string.Format("{0}", Video);
                 return Video;
             }
         }
